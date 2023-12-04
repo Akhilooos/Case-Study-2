@@ -2,20 +2,22 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+
+// Middlewares
 app.use(morgan('dev'));
-app.use(express.json());  
-app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3000; 
-
+// Set up server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
 });
 
-const path=require('path');
-app.use(express.static(path.join(__dirname+'/dist/FrontEnd')));
+const path = require('path');
+app.use(express.static(path.join(__dirname, '/dist/FrontEnd')));
 
-// Task2: create mongoDB connection 
+// Task2: create MongoDB connection
 require('dotenv').config();
 require('./db/index');
 
